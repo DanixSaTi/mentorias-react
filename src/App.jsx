@@ -1,6 +1,7 @@
 //import { useState } from 'react'
 import './App.css';
-import Handleimage from './mentoria/hooks/Handleimage.jsx';
+//import Handleimage from './mentoria/hooks/Handleimage.jsx';
+import Handleimage from './mentoria/hooks/handleimage';
 
 function App() {
 

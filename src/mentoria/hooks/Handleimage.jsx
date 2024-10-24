@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import './scss/HandleImage.scss';
 
 //Porque no me deja poner la ruta de la imagen??
