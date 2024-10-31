@@ -1,4 +1,3 @@
-//preguntar a martin lo de la imagen 
 
 import { useEffect, useState } from 'react';
 import './App.css';
@@ -10,7 +9,7 @@ const CallApi = () => {
     const urlapi = `https://pokeapi.co/api/v2/pokemon/`;
     fetch(urlapi)
       .then((resp) => resp.json())
-      .then((json) => setPokemon(json))
+      .then((json) => setPokemon(json.results))
       .catch((error) => console.log(error));
   }, []);
 
@@ -18,19 +17,36 @@ const CallApi = () => {
 };
 
 function App() { // this is the id for the looking a pokemon
-  const pokemon = CallApi();
-  console.log(pokemon);
+  const pokemonList = CallApi();
+  console.log(pokemonList);
+  const urlImg = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/";
   
   return (
     <>
-      {pokemon ? (
-        <>
-          <h1>{pokemon.name}</h1>
-          <img src={pokemon.sprites.other['dream_world'].front_default} alt={pokemon.name} /> 
-        </>
-      ) : (
-        <p>This number of pokemon dont exist...</p>
-      )}
+        {
+          pokemonList && pokemonList.map((pokemon) => {
+           const url = pokemon.url;
+           let id = 0;
+            if(url.length < 37){
+              id = url.slice(-2,-1);
+            }
+            else{
+              id = url.slice(-3,-1);
+            }
+
+            const srcImg = urlImg + id + '.svg';
+            
+            return (
+              <>
+
+                <img src={srcImg} alt={"imagen de " + pokemon.name} />
+              </>
+            )
+            
+          })
+
+        }
+          
     </>
   );
 }
