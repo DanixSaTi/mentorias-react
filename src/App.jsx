@@ -1,34 +1,39 @@
-import { useEffect, useState } from 'react';
-import './App.css'
+//preguntar a martin lo de la imagen 
 
+import { useEffect, useState } from 'react';
+import './App.css';
 
 const CallApi = () => {
-  const [result, setResult] = useState([]);
-  
-  
-  useEffect( () => {
-    const urlapi = 'https://pokeapi.co/api/v2/pokemon/';
+  const [pokemon, setPokemon] = useState(null);
+
+  useEffect(() => {
+    const urlapi = `https://pokeapi.co/api/v2/pokemon/`;
     fetch(urlapi)
-    .then(resp => resp.json())
-    .then(json => setResult(json.results))
-    .catch(error => console.log(error))
-  },[])
+      .then((resp) => resp.json())
+      .then((json) => setPokemon(json))
+      .catch((error) => console.log(error));
+  }, []);
 
-  return result;
-}
+  return pokemon;
+};
 
-function App() {
-
-  //CallApi();
-
-  const pokemonlist = CallApi();
-  console.log(pokemonlist);
-
+function App() { // this is the id for the looking a pokemon
+  const pokemon = CallApi();
+  console.log(pokemon);
+  
   return (
     <>
-    
+      {pokemon ? (
+        <>
+          <h1>{pokemon.name}</h1>
+          <img src={pokemon.sprites.other['dream_world'].front_default} alt={pokemon.name} /> 
+        </>
+      ) : (
+        <p>This number of pokemon dont exist...</p>
+      )}
     </>
-  )
+  );
 }
 
-export default App
+
+export default App;
