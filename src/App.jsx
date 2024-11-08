@@ -1,34 +1,19 @@
-import { useEffect, useState } from 'react';
-import './App.css'
-
-
-const CallApi = () => {
-  const [result, setResult] = useState([]);
-  
-  
-  useEffect( () => {
-    const urlapi = 'https://pokeapi.co/api/v2/pokemon/';
-    fetch(urlapi)
-    .then(resp => resp.json())
-    .then(json => setResult(json.results))
-    .catch(error => console.log(error))
-  },[])
-
-  return result;
-}
+import './App.css';
+import { PokemonWrapped } from './components/pokemonList';
 
 function App() {
-
-  //CallApi();
-
-  const pokemonlist = CallApi();
-  console.log(pokemonlist);
-
   return (
-    <>
+    <div className="app">
+      <div className="header-pokemon">
+      <h1>Pokemon List</h1> 
+      </div>
+      <div className='pokemon-cards'>
+        <PokemonWrapped/>
+      </div>
+      
+    </div>
     
-    </>
-  )
+  );
 }
 
-export default App
+export default App;
